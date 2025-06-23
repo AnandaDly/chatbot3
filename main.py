@@ -948,45 +948,45 @@ def admin_page():
     st.subheader("📊 All Conversations")
     
     # Tambahkan debug info
-    with st.expander("🐛 Debug Info"):
-        try:
-            # Debug 1: Cek semua collections di root level
-            collections = chat_manager.db.collections()
-            st.write("Available collections:")
-            for collection in collections:
-                st.write(f"- {collection.id}")
+    # with st.expander("🐛 Debug Info"):
+    #     try:
+    #         # Debug 1: Cek semua collections di root level
+    #         collections = chat_manager.db.collections()
+    #         st.write("Available collections:")
+    #         for collection in collections:
+    #             st.write(f"- {collection.id}")
             
-            # Debug 2: Cek apakah ada data di collection conversations
-            conversations_ref = chat_manager.db.collection("conversations")
+    #         # Debug 2: Cek apakah ada data di collection conversations
+    #         conversations_ref = chat_manager.db.collection("conversations")
             
-            # Coba ambil semua documents (termasuk yang tidak ada parent doc)
-            all_docs = list(conversations_ref.list_documents())
-            st.write(f"Documents in conversations collection: {len(all_docs)}")
+    #         # Coba ambil semua documents (termasuk yang tidak ada parent doc)
+    #         all_docs = list(conversations_ref.list_documents())
+    #         st.write(f"Documents in conversations collection: {len(all_docs)}")
             
-            # Debug 3: Cek setiap document
-            for doc_ref in all_docs:
-                st.write(f"Document ID: {doc_ref.id}")
+    #         # Debug 3: Cek setiap document
+    #         for doc_ref in all_docs:
+    #             st.write(f"Document ID: {doc_ref.id}")
                 
-                # Cek apakah document benar-benar ada
-                doc_snapshot = doc_ref.get()
-                if doc_snapshot.exists:
-                    st.write(f"  - Document exists with data: {doc_snapshot.to_dict()}")
-                else:
-                    st.write(f"  - Document doesn't exist (only subcollections)")
+    #             # Cek apakah document benar-benar ada
+    #             doc_snapshot = doc_ref.get()
+    #             if doc_snapshot.exists:
+    #                 st.write(f"  - Document exists with data: {doc_snapshot.to_dict()}")
+    #             else:
+    #                 st.write(f"  - Document doesn't exist (only subcollections)")
                 
-                # Cek subcollections
-                subcollections = doc_ref.collections()
-                for subcoll in subcollections:
-                    subcoll_docs = list(subcoll.stream())
-                    st.write(f"  - Subcollection '{subcoll.id}': {len(subcoll_docs)} messages")
+    #             # Cek subcollections
+    #             subcollections = doc_ref.collections()
+    #             for subcoll in subcollections:
+    #                 subcoll_docs = list(subcoll.stream())
+    #                 st.write(f"  - Subcollection '{subcoll.id}': {len(subcoll_docs)} messages")
             
-            # Debug 4: Langsung cek method save_conversation
-            st.write(f"Current user_id: {st.session_state.get('user_id', 'Not set')}")
+    #         # Debug 4: Langsung cek method save_conversation
+    #         st.write(f"Current user_id: {st.session_state.get('user_id', 'Not set')}")
             
-        except Exception as e:
-            st.error(f"Debug error: {e}")
-            import traceback
-            st.code(traceback.format_exc())
+    #     except Exception as e:
+    #         st.error(f"Debug error: {e}")
+    #         import traceback
+    #         st.code(traceback.format_exc())
             
     # Get all conversations
     conversations = chat_manager.get_all_conversations()
