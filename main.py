@@ -367,19 +367,19 @@ def init_firebase():
             st.info("4. Make sure Firestore is enabled in your Firebase project")
             
             # Show debug information
-            with st.expander("🐛 Debug Information"):
-                if st.secrets.get("firebase"):
-                    config_keys = list(st.secrets["firebase"].keys())
-                    st.write("Available config keys:", config_keys)
-                    if "private_key" in st.secrets["firebase"]:
-                        pk = st.secrets["firebase"]["private_key"]
-                        st.write("Private key starts with:", pk[:50] + "...")
-                        st.write("Contains \\n?", "\\n" in pk)
-                        st.write("Contains newlines?", "\n" in pk)
-                else:
-                    st.write("No Firebase secrets found in Streamlit configuration")
+            # with st.expander("🐛 Debug Information"):
+            #     if st.secrets.get("firebase"):
+            #         config_keys = list(st.secrets["firebase"].keys())
+            #         st.write("Available config keys:", config_keys)
+            #         if "private_key" in st.secrets["firebase"]:
+            #             pk = st.secrets["firebase"]["private_key"]
+            #             st.write("Private key starts with:", pk[:50] + "...")
+            #             st.write("Contains \\n?", "\\n" in pk)
+            #             st.write("Contains newlines?", "\n" in pk)
+            #     else:
+            #         st.write("No Firebase secrets found in Streamlit configuration")
             
-            st.stop()
+            # st.stop()
     
     return firestore.client()
 
